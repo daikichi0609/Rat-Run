@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{ED1C13CC-9E0F-AF10-D0E7-61E95E890CFA}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/GameManagerScript.cs">
+    <Files>
+      <File FileName="Assets/Script/EnemyScript.cs" Line="186" Column="23" />
+      <File FileName="Assets/Script/PlayerScript.cs" Line="19" Column="28" />
+      <File FileName="Assets/Script/EnemySightScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/FurnishedCabin/Scripts/MoveObjectController.cs" Line="109" Column="5" />
+      <File FileName="Assets/Script/RetryScript.cs" Line="19" Column="44" />
+      <File FileName="Assets/Script/GameManagerScript.cs" Line="35" Column="36" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="12bcd1b1-fb76-4d29-9c14-a53047ea4f79" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
