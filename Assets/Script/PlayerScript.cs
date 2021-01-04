@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public GameManagerScript GameManager;
     //プレイヤー
     public GameObject Player;
-    //ゲームオーバー
-    public bool isGameOver;
-    //ポイント
-    public int pt;
-    //チーズ
-    public int CheeseCount;
-    public AudioSource CheeseGetSound;
     // 前進速度
     float forwardSpeed = 5.0f;
     //後退速度
@@ -32,14 +26,11 @@ public class PlayerScript : MonoBehaviour
     //音
     public GameObject RunningSound;
     public GameObject WalkingSound;
-    //ゲームオーバー
-    public bool GameOver;
-    public GameObject GameOverCamera;
+    public AudioSource CheeseGetSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        pt = 0;
         animator = GetComponent<Animator>();
         MainOn = true;
         Stealth = true;
@@ -49,6 +40,18 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ゲームオーバーのアニメーション
+        if (GameManager.isGameOver)
+        {
+            animator.SetBool("IsGameOver", true);
+            animator.SetBool("IsWalking", false);
+            return;
+        }
+        else if (!GameManager.isGameOver)
+        {
+            animator.SetBool("IsGameOver", false);
+        }
+
         float h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
         float v = Input.GetAxis("Vertical");                // 入力デバイスの垂直軸をvで定義
 
@@ -64,11 +67,11 @@ public class PlayerScript : MonoBehaviour
             gameObject.transform.position += velocity * Time.deltaTime;
         }
         //移動のアニメーション
-        if (v != 0 && !isGameOver)
+        if (v != 0)
         {
             animator.SetBool("IsWalking", true);
         }
-        else if (v == 0 && !isGameOver)
+        else if (v == 0)
         {
             animator.SetBool("IsWalking", false);
             RunningSound.SetActive(false);
@@ -86,16 +89,6 @@ public class PlayerScript : MonoBehaviour
             animator.SetFloat("Speed", -backSpeed);
             WalkingSound.SetActive(true);
             RunningSound.SetActive(false);
-        }
-        //ゲームオーバーのアニメーション
-        if (isGameOver)
-        {
-            animator.SetBool("IsGameOver", true);
-            animator.SetBool("IsWalking", false);
-        }
-        else if (!isGameOver)
-        {
-            animator.SetBool("IsGameOver", false);
         }
 
         // 左右のキー入力でキャラクタをY軸で旋回させる
@@ -157,7 +150,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(Stealth || GameOver)
+            if(Stealth)
             {
                 return;
             }
@@ -185,7 +178,7 @@ public class PlayerScript : MonoBehaviour
          if(collision.gameObject.tag == "Enemy")
         {
             Debug.Log("GameOver");
-            isGameOver = true;
+            GameManager.isGameOver = true;
         }
     }
 
@@ -200,8 +193,8 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Cheese")
         {
             Destroy(other.gameObject);
-            CheeseCount++;
-            pt++;
+            GameManager.CheeseCount++;
+            GameManager.pt++;
             CheeseGetSound.Play();
         }
     }

@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     //public Transform target;
     //NavMeshAgent agent;
 
+    public GameManagerScript GameManager;
     //プレイヤー
     public PlayerScript Player;
     public NavMeshAgent navMeshAgent;
@@ -65,8 +66,13 @@ public class EnemyScript : MonoBehaviour
     {
         //agent.SetDestination(target.position);
 
+        if(GameManager.isGameOver)
+        {
+            return;
+        }
         //状況に応じてアニメーションを変化
         speed = rigid.velocity.magnitude;
+        //Debug.Log(speed);
         if (speed <= 0)
         {
             animator.SetBool("IsWalking", false);
@@ -83,17 +89,17 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("IsWalking", false);
         }
         //アニメーションの早さ
-        animator.SetFloat("Speed", speed / 2);
+        animator.SetFloat("Speed", 2);
 
         //waypoint到着時に呼ばれる
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !isDetected &&!Player.GameOver)
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !isDetected)
         {
             GetNewNum();
             //currentWaypointIndex = currentWaypointIndex % waypoints.Length;
             navMeshAgent.SetDestination(waypoints[currentWaypointIndex].position);
         }
         //プレイヤーに気づいているとき
-        if (isDetected && !Player.GameOver)
+        if (isDetected)
         {
             navMeshAgent.SetDestination(target.transform.position);
             if(!Waiting)
@@ -116,7 +122,7 @@ public class EnemyScript : MonoBehaviour
     public void DetectPlayer()
     {
         //ゲームオーバー、ステルス状態、既に発見しているとき、発見しない
-        if(Player.GameOver)
+        if(GameManager.isGameOver)
         {
             return;
         }
@@ -158,17 +164,21 @@ public class EnemyScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if(GameManager.isGameOver)
+            {
+                return;
+            }
             exclamationPop.SetActive(false);
             //gameEnding.IsCaught();
             animator.SetBool("IsWalking", false);
             animator.SetBool("IsRunning", false);
             isDetected = false;
             speed = 0;
-            Player.GameOver = true;
+            GameManager.isGameOver = true;
             PunchSound.Play();
             TinSound.Play();
             StartCoroutine(Checking(() => {
-                Player.GameOver = false;
+                GameManager.isGameOver = false;
                 SceneManager.LoadScene("Result");
             }));
         }
