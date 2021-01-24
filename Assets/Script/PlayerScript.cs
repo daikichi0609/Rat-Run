@@ -9,8 +9,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject Player;
     //データを代入する
     public GameData GameData;
+    //HorizontalとVertical
+    public float h;
+    public float v; 
     // 前進速度
-    float forwardSpeed = 4.0f;
+    float forwardSpeed = 5.5f;
     //後退速度
     float backSpeed = 2.0f;
     //旋回速度
@@ -35,7 +38,7 @@ public class PlayerScript : MonoBehaviour
     float countTime = 0;
     //吹き飛ばし
     Rigidbody rigidBody;
-    float impulse = 10000;
+    float impulse = 1;
     Vector3 playerVelocity;
 
     // Start is called before the first frame update
@@ -79,19 +82,21 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("IsGameOver", false);
         }
 
-        float h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
-        float v = Input.GetAxis("Vertical");                // 入力デバイスの垂直軸をvで定義
+        h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
+        v = Input.GetAxis("Vertical");                // 入力デバイスの垂直軸をvで定義
 
         // 以下、キャラクターの移動処理
         if (v >= 0)
         {
             Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, v * forwardSpeed);
-            gameObject.transform.position += velocity * Time.deltaTime;
+            //gameObject.transform.position += velocity * Time.deltaTime;
+            rigidBody.velocity = velocity;
         }
         else if (v < 0)
         {
             Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, v * backSpeed);
-            gameObject.transform.position += velocity * Time.deltaTime;
+            //gameObject.transform.position += velocity * Time.deltaTime;
+            rigidBody.velocity = velocity;
         }
         //移動のアニメーション
         if (v != 0)
@@ -209,14 +214,16 @@ public class PlayerScript : MonoBehaviour
             GameManager.isGameOver = true;
         }
          //壁に衝突したとき
-         if(collision.gameObject.tag == "Wall")
+         else
         {
-            GameManager.clashTimes++;
-            GameManager.isFaint = true;
-            CrashSound.Play();
-            FaintSound.Play();
-            playerVelocity = rigidBody.velocity;
-            rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
+            if(!Stealth && v == 1)
+            {
+                GameManager.clashTimes++;
+                GameManager.isFaint = true;
+                CrashSound.Play();
+                FaintSound.Play();
+                rigidBody.AddForce(playerVelocity * -impulse, ForceMode.Impulse);
+            }  
         }
     }
 

@@ -26,12 +26,14 @@ public class GameManagerScript : MonoBehaviour
     //音
     public AudioSource BGM;
     public AudioSource FueSound;
+    //ゲーム終了
+    public bool Finish;
 
     // Start is called before the first frame update
     void Start()
     {
         //ゲーム時間
-        TimeCount = 120;
+        TimeCount = 90;
         //値を初期化
         CheeseCount = 0;
         iscaughtTimes = 0;
@@ -42,7 +44,10 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeCount -= Time.deltaTime;
+        if(!Finish)
+        {
+            TimeCount -= Time.deltaTime;
+        }
         seconds = (int)TimeCount;
         TimeCountText.text = "TIME\n" + seconds.ToString();
 
@@ -50,15 +55,19 @@ public class GameManagerScript : MonoBehaviour
 
         if(TimeCount <= 0)
         {
-            Debug.Log("Time Up!!");
-            BGM.Stop();
-            FueSound.Play();
-            StartCoroutine(Checking(() => {
-                Substitute();
-                isGameOver = false;
-                SceneManager.LoadScene("Result");
-            }));
+            if(!Finish)
+            {
+                Finish = true;
+                Debug.Log("Time Up!!");
+                FueSound.Play();
+                StartCoroutine(Checking(() => {
+                    Substitute();
+                    isGameOver = false;
+                    SceneManager.LoadScene("Result");
+                }));
+            }
         }
+        
     }
 
     public void Substitute()

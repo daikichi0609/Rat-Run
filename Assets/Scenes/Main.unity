@@ -581,8 +581,9 @@ MonoBehaviour:
   CheeseCountText: {fileID: 2050836404}
   isGameOver: 0
   isFaint: 0
-  BGM: {fileID: 0}
-  FueSound: {fileID: 0}
+  BGM: {fileID: 1381243014}
+  FueSound: {fileID: 1133925075}
+  Finish: 0
 --- !u!4 &204227180
 Transform:
   m_ObjectHideFlags: 0
@@ -6983,7 +6984,7 @@ PrefabInstance:
     - target: {fileID: 64000012121242332, guid: 23d25b2e2d4364dd4b92c52ef40cd36e,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}

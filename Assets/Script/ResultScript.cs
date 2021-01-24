@@ -25,7 +25,8 @@ public class ResultScript : MonoBehaviour
     public Text ScoreText;
     public int Score;
 
-    public Text PressToPlayText;
+    public GameObject RetryText;
+    public GameObject TitleText;
 
     //音
     public AudioSource JanSound;
@@ -121,6 +122,8 @@ public class ResultScript : MonoBehaviour
         JajanSound.Play();
         StartCoroutine(CheckingSound(() => {
             Finish = true;
+            RetryText.SetActive(true);
+            TitleText.SetActive(true);
         }));
     }
 
