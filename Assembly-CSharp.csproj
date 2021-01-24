@@ -79,7 +79,7 @@
     <Compile Include="Assets\Script\GameData.cs" />
     <Compile Include="Assets\Script\GameManagerScript.cs" />
     <Compile Include="Assets\Script\PlayerScript.cs" />
-    <Compile Include="Assets\Script\RetryScript.cs" />
+    <Compile Include="Assets\Script\ResultScript.cs" />
     <None Include="Assets\ConeCollider\readme_jp.txt" />
     <None Include="Assets\ConeCollider\readme_en.txt" />
     <Reference Include="Unity.Timeline.Editor">

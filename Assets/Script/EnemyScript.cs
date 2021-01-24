@@ -59,6 +59,8 @@ public class EnemyScript : MonoBehaviour
         rigid = this.gameObject.GetComponent<Rigidbody>();
 
         animator = GetComponent<Animator>();
+        //アニメーションの早さ
+        animator.SetFloat("Speed", 2);
     }
 
     // Update is called once per frame
@@ -88,8 +90,6 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("IsRunning", true);
             animator.SetBool("IsWalking", false);
         }
-        //アニメーションの早さ
-        animator.SetFloat("Speed", 2);
 
         //waypoint到着時に呼ばれる
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !isDetected)
@@ -143,6 +143,7 @@ public class EnemyScript : MonoBehaviour
     public void MissPlayer()
     {
         Debug.Log("見失ったニャ！");
+        GameManager.escapedTimes++;
         exclamationPop.SetActive(false);
         SuccessSound.Play();
         currentWaypointIndex = Random.Range(0, 8);
@@ -168,17 +169,21 @@ public class EnemyScript : MonoBehaviour
             {
                 return;
             }
+            //表示を消す
             exclamationPop.SetActive(false);
             //gameEnding.IsCaught();
+            //アニメーションをアイドル状態にする
             animator.SetBool("IsWalking", false);
             animator.SetBool("IsRunning", false);
+            //追尾をやめる
             isDetected = false;
             speed = 0;
-            GameManager.isGameOver = true;
+            //音を鳴らす 鳴り終わったらシーン遷移
             PunchSound.Play();
             TinSound.Play();
             StartCoroutine(Checking(() => {
                 GameManager.isGameOver = false;
+                GameManager.Substitute();
                 SceneManager.LoadScene("Result");
             }));
         }

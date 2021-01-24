@@ -8,6 +8,7 @@ TagManager:
   - Cheese
   - EnemySight
   - Stealth
+  - Wall
   layers:
   - Default
   - TransparentFX

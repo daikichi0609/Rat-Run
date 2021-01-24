@@ -7,12 +7,14 @@ public class PlayerScript : MonoBehaviour
     public GameManagerScript GameManager;
     //プレイヤー
     public GameObject Player;
+    //データを代入する
+    public GameData GameData;
     // 前進速度
-    float forwardSpeed = 5.0f;
+    float forwardSpeed = 4.0f;
     //後退速度
     float backSpeed = 2.0f;
     //旋回速度
-    float rotateSpeed = 4.0f;
+    float rotateSpeed = 3.0f;
     //アニメーター
     Animator animator;
     //カメラ
@@ -27,6 +29,14 @@ public class PlayerScript : MonoBehaviour
     public GameObject RunningSound;
     public GameObject WalkingSound;
     public AudioSource CheeseGetSound;
+    public AudioSource CrashSound;
+    public AudioSource FaintSound;
+    //タイマー
+    float countTime = 0;
+    //吹き飛ばし
+    Rigidbody rigidBody;
+    float impulse = 10000;
+    Vector3 playerVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +45,30 @@ public class PlayerScript : MonoBehaviour
         MainOn = true;
         Stealth = true;
         StealthOn = true;
+        //アニメーションの早さ
+        //animator.SetFloat("Speed", 2);
+
+        rigidBody = Player.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ゲームオーバーのアニメーション
-        if (GameManager.isGameOver)
+        playerVelocity = rigidBody.velocity;
+        Debug.Log(playerVelocity);
+        //気絶中
+        if (GameManager.isFaint)
+        {
+            countTime += Time.deltaTime; //スタートしてからの秒数を格納
+            if (countTime >= 3f)
+            {
+                countTime = 0;
+                GameManager.isFaint = false;
+                FaintSound.Stop();
+            }
+        }
+        //ゲームオーバーと気絶のアニメーション
+        if (GameManager.isGameOver || GameManager.isFaint)
         {
             animator.SetBool("IsGameOver", true);
             animator.SetBool("IsWalking", false);
@@ -178,7 +205,18 @@ public class PlayerScript : MonoBehaviour
          if(collision.gameObject.tag == "Enemy")
         {
             Debug.Log("GameOver");
+            GameManager.iscaughtTimes++;
             GameManager.isGameOver = true;
+        }
+         //壁に衝突したとき
+         if(collision.gameObject.tag == "Wall")
+        {
+            GameManager.clashTimes++;
+            GameManager.isFaint = true;
+            CrashSound.Play();
+            FaintSound.Play();
+            playerVelocity = rigidBody.velocity;
+            rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
         }
     }
 
@@ -194,7 +232,6 @@ public class PlayerScript : MonoBehaviour
         {
             Destroy(other.gameObject);
             GameManager.CheeseCount++;
-            GameManager.pt++;
             CheeseGetSound.Play();
         }
     }
