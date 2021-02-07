@@ -101,7 +101,9 @@ public class EnemyScript : MonoBehaviour
         //プレイヤーに気づいているとき
         if (isDetected)
         {
+            GameManager.MasterDetected = true;
             navMeshAgent.SetDestination(target.transform.position);
+            //遅延
             if(!Waiting)
             {
                 Waiting = true;
@@ -142,6 +144,7 @@ public class EnemyScript : MonoBehaviour
     //プレイヤーを見失ったとき
     public void MissPlayer()
     {
+        GameManager.MasterDetected = false;
         Debug.Log("見失ったニャ！");
         GameManager.escapedTimes++;
         exclamationPop.SetActive(false);

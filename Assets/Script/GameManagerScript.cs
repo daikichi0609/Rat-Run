@@ -23,6 +23,8 @@ public class GameManagerScript : MonoBehaviour
     public bool isGameOver;
     //気絶
     public bool isFaint;
+    //気づかれている状態
+    public bool MasterDetected;
     //音
     public AudioSource BGM;
     public AudioSource FueSound;

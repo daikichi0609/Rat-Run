@@ -38,8 +38,13 @@ public class PlayerScript : MonoBehaviour
     float countTime = 0;
     //吹き飛ばし
     Rigidbody rigidBody;
-    float impulse = 1;
+    float impulse = 100;
     Vector3 playerVelocity;
+    //星
+    public GameObject Stars;
+    //壁登り
+    public bool isClimbing;
+    public bool ReadyToClimb;
 
     // Start is called before the first frame update
     void Start()
@@ -57,13 +62,23 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //壁登り条件
+        if (!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1 && GameManager.MasterDetected == false)
+        {
+            ReadyToClimb = true;
+        }
+        else
+        {
+            ReadyToClimb = false;
+        }
         playerVelocity = rigidBody.velocity;
         Debug.Log(playerVelocity);
         //気絶中
         if (GameManager.isFaint)
         {
+            animator.SetFloat("Faint", 100.0f);
             countTime += Time.deltaTime; //スタートしてからの秒数を格納
-            if (countTime >= 3f)
+            if (countTime >= 2f)
             {
                 countTime = 0;
                 GameManager.isFaint = false;
@@ -71,15 +86,29 @@ public class PlayerScript : MonoBehaviour
             }
         }
         //ゲームオーバーと気絶のアニメーション
-        if (GameManager.isGameOver || GameManager.isFaint)
+        if (GameManager.isGameOver)
         {
             animator.SetBool("IsGameOver", true);
             animator.SetBool("IsWalking", false);
+            RunningSound.SetActive(false);
+            WalkingSound.SetActive(false);
+            Stars.SetActive(true);
             return;
         }
-        else if (!GameManager.isGameOver)
+        else if(GameManager.isFaint)
+        {
+            animator.SetBool("IsFainting", true);
+            animator.SetBool("IsWalking", false);
+            RunningSound.SetActive(false);
+            WalkingSound.SetActive(false);
+            Stars.SetActive(true);
+            return;
+        }
+        else if (!GameManager.isGameOver && !GameManager.isFaint)
         {
             animator.SetBool("IsGameOver", false);
+            animator.SetBool("IsFainting", false);
+            Stars.SetActive(false);
         }
 
         h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
@@ -209,14 +238,24 @@ public class PlayerScript : MonoBehaviour
         //敵に触れたとき
          if(collision.gameObject.tag == "Enemy")
         {
+            if(GameManager.isGameOver)
+            {
+                return;
+            }
             Debug.Log("GameOver");
             GameManager.iscaughtTimes++;
             GameManager.isGameOver = true;
+            rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
         }
          //壁に衝突したとき
          else
         {
-            if(!Stealth && v == 1)
+            //if(ReadyToClimb)
+            //{
+            //    isClimbing = true;
+            //    return;
+            //} else
+            if(!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1)
             {
                 GameManager.clashTimes++;
                 GameManager.isFaint = true;

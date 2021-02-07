@@ -93,7 +93,7 @@ public class ResultScript : MonoBehaviour
                 SurviveBonusTitle.SetActive(true);
                 if (GameData.iscaughtTimes == 0)
                 {
-                    SurviveBonusText.text = "+5pt";
+                    SurviveBonusText.text = "+10pt";
                 }
                 else
                 {
