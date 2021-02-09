@@ -13,10 +13,10 @@ public class PlayerScript : MonoBehaviour
     public float h;
     public float v; 
     // 前進速度
-    float forwardSpeed = 5.5f;
+    float forwardSpeed = 5.0f;
     //後退速度
     float backSpeed = 2.0f;
-    //旋回速度
+    //旋回速度s
     float rotateSpeed = 3.0f;
     //アニメーター
     Animator animator;
@@ -62,6 +62,18 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerVelocity = rigidBody.velocity;
+        Debug.Log(playerVelocity);
+        //最初は動けない
+        if(GameManager.StartTimer >= 0)
+        {
+            return;
+        }
+        //制限時間が経つまで動ける
+        if (GameManager.TimeCount <= 0)
+        {
+            return;
+        }
         //壁登り条件
         if (!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1 && GameManager.MasterDetected == false)
         {
@@ -71,8 +83,6 @@ public class PlayerScript : MonoBehaviour
         {
             ReadyToClimb = false;
         }
-        playerVelocity = rigidBody.velocity;
-        Debug.Log(playerVelocity);
         //気絶中
         if (GameManager.isFaint)
         {

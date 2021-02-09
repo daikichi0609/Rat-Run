@@ -31,10 +31,10 @@ public class ResultScript : MonoBehaviour
     //音
     public AudioSource JanSound;
     public AudioSource JajanSound;
+    public AudioSource PushSound;
 
     //表示演出関連
     int num;
-    int timer;
     bool Finish;
 
     // Start is called before the first frame update
@@ -49,9 +49,19 @@ public class ResultScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && Finish)
+        if(Input.GetKeyDown(KeyCode.R) && Finish)
         {
-            SceneManager.LoadScene("Main");
+            PushSound.Play();
+            StartCoroutine(CheckingSound(() => {
+                SceneManager.LoadScene("Main");
+            }));
+        }
+        if (Input.GetKeyDown(KeyCode.T) && Finish)
+        {
+            PushSound.Play();
+            StartCoroutine(CheckingSound(() => {
+                SceneManager.LoadScene("Title");
+            }));
         }
     }
 
@@ -147,7 +157,7 @@ public class ResultScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForFixedUpdate();
-            if (!JanSound.isPlaying)
+            if (!JanSound.isPlaying && !PushSound.isPlaying)
             {
                 callback();
                 break;

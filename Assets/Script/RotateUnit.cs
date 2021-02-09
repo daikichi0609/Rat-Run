@@ -19,12 +19,11 @@ public class RotateUnit: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(30, 30, 30);
-        
         //　ユニットの位置 = ターゲットの位置 ＋ ターゲットから見たユニットの角度 ×　ターゲットからの距離
         transform.position = target.position + Quaternion.Euler(0f, angle, 0f) * distanceFromTarget;
         //　ユニット自身の角度 = ターゲットから見たユニットの方向の角度を計算しそれをユニットの角度に設定する
-        transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
+        //transform.rotation = Quaternion.LookRotation(transform.position - new Vector3(target.position.x, transform.position.y, target.position.z), Vector3.up);
+        transform.Rotate(new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10)));
         //　ユニットの角度を変更
         angle += rotateSpeed * Time.deltaTime;
         //　角度を0～360度の間で繰り返す

@@ -82,6 +82,7 @@
     <Compile Include="Assets\Script\PlayerScript.cs" />
     <Compile Include="Assets\Script\ResultScript.cs" />
     <Compile Include="Assets\Script\RotateUnit.cs" />
+    <Compile Include="Assets\Script\TitleScript.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\DemoScene\FlyCamera.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
@@ -89,6 +90,7 @@
     <None Include="Assets\ConeCollider\readme_jp.txt" />
     <None Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
     <None Include="Assets\ConeCollider\readme_en.txt" />
+    <None Include="Assets\Fonts\MODI_memoir_2018_1215\readme.txt" />
     <None Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/daikichi/Desktop/UnityProjects/Rat Run!!/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

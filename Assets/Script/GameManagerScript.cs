@@ -30,26 +30,67 @@ public class GameManagerScript : MonoBehaviour
     public AudioSource FueSound;
     //ゲーム終了
     public bool Finish;
+    //ゲーム開始
+    public bool Starting;
+    public AudioSource ReadySound;
+    public AudioSource StartSound;
+    public float StartTimer;
+    public GameObject ReadyText;
+    public GameObject GoText;
+    public GameObject FinishText;
+    public GameObject GetCaughtText;
 
     // Start is called before the first frame update
     void Start()
     {
         //ゲーム時間
-        TimeCount = 90;
+        TimeCount = 90f;
         //値を初期化
         CheeseCount = 0;
         iscaughtTimes = 0;
         escapedTimes = 0;
         clashTimes = 0;
+        //ゲーム開始
+        ReadySound.Play();
+        StartTimer = 2f;
+        ReadyText.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //捕まったらテキストを出す
+        if (iscaughtTimes != 0)
+        {
+            GetCaughtText.SetActive(true);
+            return;
+        }
+        //ゲーム開始の準備
+        StartTimer -= Time.deltaTime;
+        if(StartTimer <= 0f)
+        {
+            if(!Starting)
+            {
+                BGM.Play();
+                StartSound.Play();
+                Starting = true;
+                GoText.SetActive(true);
+                ReadyText.SetActive(false);
+            }
+        }
+        if(TimeCount <= 89f)
+        {
+            GoText.SetActive(false);
+        }
+        if(!Starting)
+        {
+            return;
+        }
         if(!Finish)
         {
             TimeCount -= Time.deltaTime;
         }
+        //制限時間
         seconds = (int)TimeCount;
         TimeCountText.text = "TIME\n" + seconds.ToString();
 
@@ -62,6 +103,7 @@ public class GameManagerScript : MonoBehaviour
                 Finish = true;
                 Debug.Log("Time Up!!");
                 FueSound.Play();
+                FinishText.SetActive(true);
                 StartCoroutine(Checking(() => {
                     Substitute();
                     isGameOver = false;
@@ -69,7 +111,6 @@ public class GameManagerScript : MonoBehaviour
                 }));
             }
         }
-        
     }
 
     public void Substitute()
