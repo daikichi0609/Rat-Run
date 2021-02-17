@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject MainCamera;
     public GameObject SubCamera;
     public GameObject StealthCamera;
+    public GameObject ClimbCamera;
     bool MainOn;
     //ステルス状態
     public bool Stealth;
@@ -43,8 +44,12 @@ public class PlayerScript : MonoBehaviour
     //星
     public GameObject Stars;
     //壁登り
+    public ChangeGravity ChangeGravity;
     public bool isClimbing;
     public bool ReadyToClimb;
+    public bool ClimbOn;
+    //クールタイム
+    public float CT;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +67,13 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //CTカウント
+        if(CT >= 0)
+        {
+            CT -= Time.deltaTime;
+        }
         playerVelocity = rigidBody.velocity;
-        Debug.Log(playerVelocity);
+        //Debug.Log(playerVelocity);
         //最初は動けない
         if(GameManager.StartTimer >= 0)
         {
@@ -137,6 +147,24 @@ public class PlayerScript : MonoBehaviour
             //gameObject.transform.position += velocity * Time.deltaTime;
             rigidBody.velocity = velocity;
         }
+
+        if (!isClimbing)
+        {
+            // 左右のキー入力でキャラクタをY軸で旋回させる
+            Vector3 playerPos = transform.position;
+            transform.RotateAround(playerPos, Vector3.up, h * rotateSpeed);
+        }
+        else if(isClimbing)
+        {
+            switch (ChangeGravity.num)
+            {
+                case 1:
+                    Vector3 playerPos = transform.position;
+                    transform.RotateAround(playerPos, Vector3.right, h * rotateSpeed);
+                    break;
+            }
+        }
+
         //移動のアニメーション
         if (v != 0)
         {
@@ -161,10 +189,6 @@ public class PlayerScript : MonoBehaviour
             WalkingSound.SetActive(true);
             RunningSound.SetActive(false);
         }
-
-        // 左右のキー入力でキャラクタをY軸で旋回させる
-        Vector3 playerPos = transform.position;
-        transform.RotateAround(playerPos, Vector3.up, h * rotateSpeed);
 
         //if(Input.GetKey(KeyCode.W))
         //{
@@ -209,19 +233,38 @@ public class PlayerScript : MonoBehaviour
             MainCamera.SetActive(false);
             SubCamera.SetActive(false);
         }
-        else if(!Stealth)
+        else if(isClimbing)
         {
-            //ステルス解除時にメインカメラに切替
+            //クライム中は専用のカメラを使う
+            ClimbOn = true;
+            ClimbCamera.SetActive(true);
+            MainOn = true;
+            MainCamera.SetActive(false);
+            SubCamera.SetActive(false);
+        }
+        else if(!Stealth && !isClimbing)
+        {
+            //ステルス解除時とクライム終わりにメインカメラに切替
             if(StealthOn)
             {
                 StealthOn = false;
                 StealthCamera.SetActive(false);
                 MainCamera.SetActive(true);
             }
+            else if(ClimbOn)
+            {
+                ClimbOn = false;
+                ClimbCamera.SetActive(false);
+                MainCamera.SetActive(true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(Stealth)
+            {
+                return;
+            }
+            if(isClimbing)
             {
                 return;
             }
@@ -260,13 +303,9 @@ public class PlayerScript : MonoBehaviour
          //壁に衝突したとき
          else
         {
-            //if(ReadyToClimb)
-            //{
-            //    isClimbing = true;
-            //    return;
-            //} else
-            if(!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1)
+            if(!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1 &&!isClimbing && CT <= 0f)
             {
+                CT = 3.0f;
                 GameManager.clashTimes++;
                 GameManager.isFaint = true;
                 CrashSound.Play();
@@ -289,6 +328,23 @@ public class PlayerScript : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.CheeseCount++;
             CheeseGetSound.Play();
+        }
+        //壁登り
+        if(other.gameObject.tag == "Wall" && ReadyToClimb)
+        {
+            if(isClimbing)
+            {
+                return;
+            }
+            isClimbing = true;
+            ChangeGravity.num = other.gameObject.GetComponent<WallScript>().num;
+            ChangeGravity.ClimbWalls();
+        }
+        //壁登り解除
+        if (other.gameObject.tag == "Plane" && isClimbing)
+        {
+            CT = 3.0f;
+            isClimbing = false;
         }
     }
 

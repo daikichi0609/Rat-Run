@@ -75,6 +75,7 @@
     <Compile Include="Assets\FurnishedCabin\Scripts\MoveableObject.cs" />
     <Compile Include="Assets\FurnishedCabin\Scripts\MoveObjectController.cs" />
     <Compile Include="Assets\Lowpoly Toon Cat Lite\Demo\Cat_Lite_Demo.cs" />
+    <Compile Include="Assets\Script\ChangeGravity.cs" />
     <Compile Include="Assets\Script\EnemyScript.cs" />
     <Compile Include="Assets\Script\EnemySightScript.cs" />
     <Compile Include="Assets\Script\GameData.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Script\ResultScript.cs" />
     <Compile Include="Assets\Script\RotateUnit.cs" />
     <Compile Include="Assets\Script\TitleScript.cs" />
+    <Compile Include="Assets\Script\WallScript.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\DemoScene\FlyCamera.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
     <Compile Include="Assets\SimplePoly - Town Pack\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
