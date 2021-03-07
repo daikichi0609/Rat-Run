@@ -9,6 +9,9 @@ TagManager:
   - EnemySight
   - Stealth
   - Wall
+  - Plane
+  - NotWall
+  - HigherPlace
   layers:
   - Default
   - TransparentFX
