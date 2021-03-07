@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class TitleScript : MonoBehaviour
 {
     public AudioSource PushButtonSound;
+    public AudioSource PushWrongSound;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,8 @@ public class TitleScript : MonoBehaviour
 
     public void PushTutorialButton()
     {
-        PushButtonSound.Play();
+        //PushButtonSound.Play();
+        PushWrongSound.Play();
         StartCoroutine(Checking(() => {
             SceneManager.LoadScene("Tutorial");
         }));
@@ -38,7 +40,8 @@ public class TitleScript : MonoBehaviour
 
     public void PushRecordingButton()
     {
-        PushButtonSound.Play();
+        //PushButtonSound.Play();
+        PushWrongSound.Play();
     }
 
     public delegate void functionType();

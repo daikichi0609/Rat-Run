@@ -50,7 +50,12 @@ public class ChangeGravity : MonoBehaviour
         switch (num)
         {
             case 1:
+                //壁突入時の角度はy = 0, 180 <= y < 360
                 localGravity = new Vector3 (-10, 0, 0);
+                if(_Rotation.y >= 180 && _Rotation.y <= 270)
+                {
+
+                }
                 transform.rotation = Quaternion.Euler(-90, -90, 0);
                 break;
         }    

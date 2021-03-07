@@ -44,6 +44,8 @@ public class EnemyScript : MonoBehaviour
     public AudioSource SuccessSound;
     public AudioSource TinSound;
     public AudioSource PunchSound;
+    //クールタイム
+    public float CT;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,13 @@ public class EnemyScript : MonoBehaviour
     {
         //agent.SetDestination(target.position);
 
-        if(GameManager.isGameOver)
+        //CTカウント
+        if (CT >= 0)
+        {
+            CT -= Time.deltaTime;
+        }
+
+        if (GameManager.isGameOver)
         {
             return;
         }
@@ -123,7 +131,7 @@ public class EnemyScript : MonoBehaviour
     //プレイヤーを発見したとき
     public void DetectPlayer()
     {
-        //ゲームオーバー、ステルス状態、既に発見しているとき、発見しない
+        //ゲームオーバー、ステルス状態、既に発見しているとき、クールダウン中、発見しない
         if(GameManager.isGameOver)
         {
             return;
@@ -136,10 +144,15 @@ public class EnemyScript : MonoBehaviour
         {
             return;
         }
+        if(CT > 0f)
+        {
+            return;
+        }
         Debug.Log("発見ニャ！");
         exclamationPop.SetActive(true);
         audioSource.Play();
-        isDetected = true; 
+        isDetected = true;
+        CT = 3.0f;
     }
     //プレイヤーを見失ったとき
     public void MissPlayer()
