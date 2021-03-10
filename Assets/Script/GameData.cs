@@ -10,6 +10,10 @@ using UnityEngine;
 
 public class GameData: ScriptableObject
 {
+    //スマホ用
+    public bool iPhone;
+    //感度
+    public float rotateSpeed;
     //獲得したチーズの数
     public int CheeseCount;
     //捕まった回数

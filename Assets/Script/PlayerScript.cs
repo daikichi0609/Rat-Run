@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     //後退速度
     float backSpeed = 2.0f;
     //旋回速度s
-    float rotateSpeed = 3.0f;
+    float rotateSpeed; //= 3.0f;
     //アニメーター
     Animator animator;
     //カメラ
@@ -72,6 +72,7 @@ public class PlayerScript : MonoBehaviour
         //アニメーションの早さ
         //animator.SetFloat("Speed", 2);
 
+        rotateSpeed = GameData.rotateSpeed;
         rigidBody = Player.GetComponent<Rigidbody>();
         Gravity = 0f;
     }
@@ -87,18 +88,7 @@ public class PlayerScript : MonoBehaviour
         {
             CT -= Time.deltaTime;
         }
-        //落下カウント
-        /*
-        if (FallTime > 0)
-        {
-            FallTime -= Time.deltaTime;
-            Gravity = -1f;
-        }
-        else if (FallTime <= 0)
-        {
-            Gravity = 0f;
-        }
-        */
+
         playerVelocity = rigidBody.velocity;
         //Debug.Log(playerVelocity);
         //最初は動けない
@@ -159,13 +149,18 @@ public class PlayerScript : MonoBehaviour
         }
 
         //PC
-        h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
-        v = Input.GetAxis("Vertical");                // 入力デバイスの垂直軸をvで定義
+        if(!GameData.iPhone)
+        {
+            h = Input.GetAxis("Horizontal");              // 入力デバイスの水平軸をhで定義
+            v = Input.GetAxis("Vertical");                // 入力デバイスの垂直軸をvで定義
+        }
 
         //スマホ
-        h = HorizontalJoystick.Horizontal;
-        v = VerticalJoystick.Vertical;
-
+        if (GameData.iPhone)
+        {
+            h = HorizontalJoystick.Horizontal;
+            v = VerticalJoystick.Vertical;
+        }
         // 以下、キャラクターの移動処理
         if (v >= 0)
         {
@@ -191,11 +186,15 @@ public class PlayerScript : MonoBehaviour
         }
         else if(isClimbing)
         {
+            Vector3 playerPos = transform.position;
             switch (ChangeGravity.num)
             {
+                //壁登りによって旋回角度が異なる
                 case 1:
-                    Vector3 playerPos = transform.position;
                     transform.RotateAround(playerPos, Vector3.right, h * rotateSpeed);
+                    break;
+                case 2:
+                    transform.RotateAround(playerPos, Vector3.back, h * rotateSpeed);
                     break;
             }
         }
@@ -399,7 +398,7 @@ public class PlayerScript : MonoBehaviour
             CT = 3.0f;
             isClimbing = false;
             Gravity = 0f;
-
+            Debug.Log("A");
             //カメラ移動
             //MainCamera.transform.position = StealthCamera.transform.position;
             //MainCamera.transform.rotation = StealthCamera.transform.rotation;

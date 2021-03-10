@@ -28,6 +28,9 @@ public class ResultScript : MonoBehaviour
     public GameObject RetryText;
     public GameObject TitleText;
 
+    public GameObject RetryButton;
+    public GameObject TitleButton;
+
     //音
     public AudioSource JanSound;
     public AudioSource JajanSound;
@@ -132,8 +135,32 @@ public class ResultScript : MonoBehaviour
         JajanSound.Play();
         StartCoroutine(CheckingSound(() => {
             Finish = true;
-            RetryText.SetActive(true);
-            TitleText.SetActive(true);
+            if(!GameData.iPhone)
+            {
+                RetryText.SetActive(true);
+                TitleText.SetActive(true);
+            }
+            else if(GameData.iPhone)
+            {
+                RetryButton.SetActive(true);
+                TitleButton.SetActive(true);
+            }
+        }));
+    }
+
+    public void Retry()
+    {
+        PushSound.Play();
+        StartCoroutine(CheckingSound(() => {
+            SceneManager.LoadScene("Main");
+        }));
+    }
+
+    public void Title()
+    {
+        PushSound.Play();
+        StartCoroutine(CheckingSound(() => {
+            SceneManager.LoadScene("Title");
         }));
     }
 

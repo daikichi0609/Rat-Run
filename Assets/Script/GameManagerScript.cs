@@ -44,7 +44,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         //ゲーム時間
-        TimeCount = 90f;
+        TimeCount = 180f;
         //値を初期化
         CheeseCount = 0;
         iscaughtTimes = 0;
@@ -78,7 +78,7 @@ public class GameManagerScript : MonoBehaviour
                 ReadyText.SetActive(false);
             }
         }
-        if(TimeCount <= 89f)
+        if(TimeCount <= 179f)
         {
             GoText.SetActive(false);
         }
