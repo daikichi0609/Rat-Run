@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d6b542279e94f3ab351671ff269cd7, type: 3}
   m_Name: New Game Data
   m_EditorClassIdentifier: 
+  Tutorial: 0
+  iPhone: 0
+  rotateSpeed: 2
+  CheeseCount: 0
+  iscaughtTimes: 0
+  escapedTimes: 0
+  clashTimes: 0

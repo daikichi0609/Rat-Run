@@ -19,14 +19,46 @@ public class TitleScript : MonoBehaviour
 
     public int ModeNum;
     public int SensitivityNum;
+    public int OldModeNum;
+    public int OldSensitivityNum;
 
     public Text OnOffText;
     public Text SMLText;
 
+    public AudioSource SwitchSound;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(GameData.iPhone)
+        {
+            ModeChangeSlider.value = 1.0f;
+        }
+        else if(!GameData.iPhone)
+        {
+            ModeChangeSlider.value = 0f;
+        }
+
+        switch (GameData.rotateSpeed)
+        {
+            case 1.0f:
+                SensitivitySlider.value = 0f;
+                SMLText.text = "S";
+                break;
+            case 2.0f:
+                SensitivitySlider.value = 1.0f;
+                SMLText.text = "M";
+                break;
+            case 3.0f:
+                SensitivitySlider.value = 2.0f;
+                SMLText.text = "L";
+                break;
+        }
+
+        ModeNum = (int)ModeChangeSlider.value;
+        SensitivityNum = (int)SensitivitySlider.value;
+        OldModeNum = ModeNum;
+        OldSensitivityNum = SensitivityNum;
     }
 
     // Update is called once per frame
@@ -63,11 +95,23 @@ public class TitleScript : MonoBehaviour
                 SMLText.text = "L";
                 break;
         }
+
+        if (OldModeNum != ModeNum)
+        {
+            OldModeNum = ModeNum;
+            SwitchSound.Play();
+        }
+        if (OldSensitivityNum != SensitivityNum)
+        {
+            OldSensitivityNum = SensitivityNum;
+            SwitchSound.Play();
+        }
     }
 
     public void PushPlayButton()
     {
         PushButtonSound.Play();
+        GameData.Tutorial = false;
         StartCoroutine(Checking(() => {
             SceneManager.LoadScene("Main");
         }));
@@ -75,17 +119,17 @@ public class TitleScript : MonoBehaviour
 
     public void PushTutorialButton()
     {
-        //PushButtonSound.Play();
-        PushWrongSound.Play();
+        PushButtonSound.Play();
+        GameData.Tutorial = true;
         StartCoroutine(Checking(() => {
-            SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene("Main");
         }));
     }
 
     public void PushRecordingButton()
     {
-        //PushButtonSound.Play();
-        PushWrongSound.Play();
+        PushButtonSound.Play();
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(0);
     }
 
     public delegate void functionType();
@@ -104,6 +148,7 @@ public class TitleScript : MonoBehaviour
 
     public void ClickOption()
     {
+        PushButtonSound.Play();
         for (int i = 0; i <= 4; i++)
         {
             InitialTitleObjects[i].SetActive(false);
@@ -116,6 +161,7 @@ public class TitleScript : MonoBehaviour
 
     public void ClickReverse()
     {
+        PushButtonSound.Play();
         for (int i = 0; i <= 4; i++)
         {
             InitialTitleObjects[i].SetActive(true);

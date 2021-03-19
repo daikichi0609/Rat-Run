@@ -1,14 +1,14 @@
 ﻿<Properties StartupConfiguration="{15B1F042-BB49-FF1E-7273-BAFA0C4640EE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/PlayerScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/GameManagerScript.cs">
     <Files>
-      <File FileName="Assets/Script/GameManagerScript.cs" Line="58" Column="1" />
-      <File FileName="Assets/Script/EnemyScript.cs" Line="147" Column="20" />
-      <File FileName="Assets/Script/PlayerScript.cs" Line="322" Column="24" />
-      <File FileName="Assets/Script/GameData.cs" Line="20" Column="27" />
-      <File FileName="Assets/Script/RotateUnit.cs" Line="28" Column="47" />
-      <File FileName="Assets/Script/TitleScript.cs" Line="45" Column="6" />
-      <File FileName="Assets/Script/ResultScript.cs" Line="64" Column="17" />
-      <File FileName="Assets/Script/ChangeGravity.cs" Line="57" Column="1" />
+      <File FileName="Assets/Script/GameManagerScript.cs" Line="64" Column="6" />
+      <File FileName="Assets/Script/EnemyScript.cs" Line="8" Column="2" />
+      <File FileName="Assets/Script/PlayerScript.cs" Line="383" Column="24" />
+      <File FileName="Assets/Script/GameData.cs" Line="14" Column="26" />
+      <File FileName="Assets/Script/RotateUnit.cs" Line="21" Column="6" />
+      <File FileName="Assets/Script/TitleScript.cs" Line="118" Column="6" />
+      <File FileName="Assets/Script/ResultScript.cs" Line="223" Column="25" />
+      <File FileName="Assets/Script/ChangeGravity.cs" Line="71" Column="68" />
       <File FileName="Assets/Script/WallScript.cs" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

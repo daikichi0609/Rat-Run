@@ -9,19 +9,10 @@ public class ResultScript : MonoBehaviour
     //参照するデータ
     public GameData GameData;
     //テキスト
-    public GameObject CheeseCountTitle;
     public Text CheeseCountText;
-
-    public GameObject EscapeBonusTitle;
     public Text EscapeBonusText;
-
-    public GameObject NoClashBonusTitle;
     public Text NoClashBonusText;
-
-    public GameObject SurviveBonusTitle;
     public Text SurviveBonusText;
-
-    public GameObject ScoreTitle;
     public Text ScoreText;
     public int Score;
 
@@ -40,13 +31,20 @@ public class ResultScript : MonoBehaviour
     int num;
     bool Finish;
 
+    public bool[] start;
+    int cheesecountBonus;
+    int escapeBonus;
+    int noclashBonus;
+    int surviveBonus;
+    int score;
+
     // Start is called before the first frame update
     void Start()
     {
         Calculate();
         num = 0;
         JanSound.Play();
-        Invoke("ShowResult", 1.0f);
+        Invoke("ShowResult", 0.5f);
     }
 
     // Update is called once per frame
@@ -66,6 +64,80 @@ public class ResultScript : MonoBehaviour
                 SceneManager.LoadScene("Title");
             }));
         }
+
+        //スコア表示
+        if(start[0])
+        {
+            CheeseCountText.text = cheesecountBonus.ToString() + "pt";
+        }
+        if (start[1])
+        {
+            EscapeBonusText.text = "+" + escapeBonus.ToString() + "pt";
+        }
+        if (start[2])
+        {
+            NoClashBonusText.text = "+" + noclashBonus.ToString() + "pt";
+        }
+        if (start[3])
+        {
+            SurviveBonusText.text = "+" + surviveBonus.ToString() + "pt";
+        }
+        if (start[4])
+        {
+            ScoreText.text = score.ToString() + "pt";
+        }
+        
+        //増加処理
+        if (start[0] && GameData.CheeseCount != cheesecountBonus)
+        {
+            cheesecountBonus = cheesecountBonus + 20;
+            if(GameData.CheeseCount == cheesecountBonus)
+            {
+                JanSound.Stop();
+                JanSound.Play();
+                Loop();
+            }
+        }
+        if (start[1] && GameData.escapedTimes != escapeBonus)
+        {
+            escapeBonus = escapeBonus + 20;
+            if (GameData.escapedTimes == escapeBonus)
+            {
+                JanSound.Stop();
+                JanSound.Play();
+                Loop();
+            }
+        }
+        if (start[2] && noclashBonus != 1000)
+        {
+            noclashBonus = noclashBonus + 20;
+            if (noclashBonus == 1000)
+            {
+                JanSound.Stop();
+                JanSound.Play();
+                Loop();
+            }
+        }
+        if (start[3] && surviveBonus != 2000)
+        {
+            surviveBonus = surviveBonus + 20;
+            if (surviveBonus == 2000)
+            {
+                JanSound.Stop();
+                JanSound.Play();
+                Loop();
+            }
+        }
+        if (start[4] && Score != score)
+        {
+            score = score + 20;
+            if (Score == score)
+            {
+                JanSound.Stop();
+                JanSound.Play();
+                ShowFinish();
+            }
+        }
     }
 
     void ShowResult()
@@ -74,60 +146,75 @@ public class ResultScript : MonoBehaviour
         {
             case 0:
                 num++;
-                Loop();
-                CheeseCountTitle.SetActive(true);
-                CheeseCountText.text = GameData.CheeseCount.ToString() + "pt";
+                start[0] = true;
+                if(GameData.CheeseCount == 0)
+                {
+                    JanSound.Stop();
+                    JanSound.Play();
+                    Loop();
+                }
                 break;
 
             case 1:
                 num++;
-                Loop();
-                EscapeBonusTitle.SetActive(true);
-                EscapeBonusText.text = "+" + GameData.escapedTimes.ToString() + "pt";
+                start[1] = true;
+                if (GameData.escapedTimes == 0)
+                {
+                    JanSound.Stop();
+                    JanSound.Play();
+                    Loop();
+                }
                 break;
 
             case 2:
                 num++;
-                Loop();
-                NoClashBonusTitle.SetActive(true);
                 if(GameData.clashTimes == 0)
                 {
-                    NoClashBonusText.text = "+5pt";
+                    start[2] = true;
                 }
                 else
                 {
-                    NoClashBonusText.text = "+0pt";
+                    start[2] = false;
+                    NoClashBonusText.text = "+" + noclashBonus.ToString() + "pt";
+                    JanSound.Stop();
+                    JanSound.Play();
+                    Loop();
                 }
                 break;
 
             case 3:
                 num++;
-                Loop();
-                SurviveBonusTitle.SetActive(true);
                 if (GameData.iscaughtTimes == 0)
                 {
-                    SurviveBonusText.text = "+10pt";
+                    start[3] = true;
                 }
                 else
                 {
-                    SurviveBonusText.text = "+0pt";
+                    start[3] = false;
+                    SurviveBonusText.text = "+" + surviveBonus.ToString() + "pt";
+                    JanSound.Stop();
+                    JanSound.Play();
+                    Loop();
                 }
                 break;
 
             case 4:
                 num = 0;
-                ShowFinish();
-                ScoreTitle.SetActive(true);
-                ScoreText.text = Score.ToString() + "pt";
+                start[4] = true;
+                if(Score == 0)
+                {
+                    JanSound.Stop();
+                    JanSound.Play();
+                    Loop();
+                }
                 break;
         }
     }
 
     void Loop()
     {
-        JanSound.Stop();
-        JanSound.Play();
-        Invoke("ShowResult", 1.0f);
+        Invoke("ShowResult" , 0.5f);
+        Debug.Log("ループ");
     }
 
     void ShowFinish()
@@ -135,7 +222,9 @@ public class ResultScript : MonoBehaviour
         JajanSound.Play();
         StartCoroutine(CheckingSound(() => {
             Finish = true;
-            if(!GameData.iPhone)
+            //スコア機能
+            naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Score);
+            if (!GameData.iPhone)
             {
                 RetryText.SetActive(true);
                 TitleText.SetActive(true);
@@ -166,15 +255,16 @@ public class ResultScript : MonoBehaviour
 
     void Calculate()
     {
-        GameData.CheeseCount = GameData.CheeseCount * 2;
+        GameData.CheeseCount = GameData.CheeseCount * 200;
+        GameData.escapedTimes = GameData.escapedTimes * 100;
         Score = GameData.CheeseCount + GameData.escapedTimes;
         if (GameData.clashTimes == 0)
         {
-            Score = Score + 5;
+            Score = Score + 1000;
         }
         if (GameData.iscaughtTimes == 0)
         {
-            Score = Score + 10;
+            Score = Score + 2000;
         }
     }
 

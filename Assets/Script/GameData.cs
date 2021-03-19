@@ -10,6 +10,8 @@ using UnityEngine;
 
 public class GameData: ScriptableObject
 {
+    //チュートリアル
+    public bool Tutorial;
     //スマホ用
     public bool iPhone;
     //感度

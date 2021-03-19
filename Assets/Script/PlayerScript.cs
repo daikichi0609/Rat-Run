@@ -51,13 +51,14 @@ public class PlayerScript : MonoBehaviour
     //クールタイム
     public float CT;
     //落下
-    public float FallTime;
     public float Gravity;
     //カメラ移動
     public int CameraMoveCount;
-    //透明壁エフェクト
+    //エフェクト
     public GameObject RippleEffect;
-    public ParticleSystem particle;
+    public ParticleSystem rippleparticle;
+    public GameObject GetEffect;
+    public ParticleSystem getparticle;
     //ジョイスティック
     public FloatingJoystick HorizontalJoystick;
     public FloatingJoystick VerticalJoystick;
@@ -82,6 +83,12 @@ public class PlayerScript : MonoBehaviour
     {
         //カメラ移動
         //MainCameraMove();
+
+        //時間停止中は実行しない
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
 
         //CTカウント
         if (CT >= 0)
@@ -302,8 +309,9 @@ public class PlayerScript : MonoBehaviour
             {
                 return;
             }
+            GameManager.ReadySound.Play();
             //メインカメラとサブカメラの切替
-            else if(MainOn)
+            if (MainOn)
             {
                 MainOn = false;
                 MainCamera.SetActive(false);
@@ -320,6 +328,40 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void ChangeCameraButton()
+    {
+        if (GameManager.StartTimer >= 0)
+        {
+            return;
+        }
+        if (Stealth)
+        {
+            return;
+        }
+        if (isClimbing)
+        {
+            return;
+        }
+        GameManager.ReadySound.Play();
+        //メインカメラとサブカメラの切替
+        if (MainOn)
+        {
+            MainOn = false;
+            MainCamera.SetActive(false);
+            SubCamera.SetActive(true);
+            return;
+        }
+        else if (!MainOn)
+        {
+            MainOn = true;
+            MainCamera.SetActive(true);
+            SubCamera.SetActive(false);
+            return;
+        }
+        
+    }
+
+
     public void OnCollisionEnter(Collision collision)
     {
         //敵に触れたとき
@@ -327,6 +369,17 @@ public class PlayerScript : MonoBehaviour
         {
             if(GameManager.isGameOver)
             {
+                return;
+            }
+            if(GameData.Tutorial)
+            {
+                //クラッシュ
+                CT = 3.0f;
+                GameManager.clashTimes++;
+                GameManager.isFaint = true;
+                CrashSound.Play();
+                FaintSound.Play();
+                rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
                 return;
             }
             Debug.Log("GameOver");
@@ -345,10 +398,15 @@ public class PlayerScript : MonoBehaviour
                     {
                         //衝突位置
                         RippleEffect.transform.position = (Vector3)point.point;
-                        particle.Play();
+                        rippleparticle.Play();
                     }
                         return;
                 }
+                if(collision.gameObject.tag == "Plane")
+                {
+                    return;
+                }
+                //クラッシュ
                 CT = 3.0f;
                 GameManager.clashTimes++;
                 GameManager.isFaint = true;
@@ -380,6 +438,9 @@ public class PlayerScript : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.CheeseCount++;
             CheeseGetSound.Play();
+            Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+            GetEffect.transform.position = hitPos;
+            getparticle.Play();
         }
         //壁登り
         if(other.gameObject.tag == "Wall" && ReadyToClimb)

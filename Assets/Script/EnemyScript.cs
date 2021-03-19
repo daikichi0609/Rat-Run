@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     //public Transform target;
     //NavMeshAgent agent;
 
+    public GameData GameData;
     public GameManagerScript GameManager;
     //プレイヤー
     public PlayerScript Player;
@@ -70,6 +71,12 @@ public class EnemyScript : MonoBehaviour
     {
         //agent.SetDestination(target.position);
 
+        //時間停止中は実行しない
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
+
         //CTカウント
         if (CT >= 0)
         {
@@ -78,6 +85,7 @@ public class EnemyScript : MonoBehaviour
 
         if (GameManager.isGameOver)
         {
+            speed = 0;
             return;
         }
         //状況に応じてアニメーションを変化
@@ -189,14 +197,18 @@ public class EnemyScript : MonoBehaviour
             exclamationPop.SetActive(false);
             //gameEnding.IsCaught();
             //アニメーションをアイドル状態にする
-            animator.SetBool("IsWalking", false);
-            animator.SetBool("IsRunning", false);
+            //animator.SetBool("IsWalking", false);
+            //animator.SetBool("IsRunning", false);
+
             //追尾をやめる
             isDetected = false;
-            speed = 0;
             //音を鳴らす 鳴り終わったらシーン遷移
             PunchSound.Play();
             TinSound.Play();
+            if (GameData.Tutorial)
+            {
+                return;
+            }
             StartCoroutine(Checking(() => {
                 GameManager.isGameOver = false;
                 GameManager.Substitute();
