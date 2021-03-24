@@ -23,8 +23,6 @@ public class GameManagerScript : MonoBehaviour
     public bool isGameOver;
     //気絶
     public bool isFaint;
-    //気づかれている状態
-    public bool MasterDetected;
     //音
     public AudioSource BGM;
     public AudioSource FueSound;
@@ -61,6 +59,7 @@ public class GameManagerScript : MonoBehaviour
         {
             TimeCountText.text = "TIME\n" + "999";
         }
+        AudioListener.volume = GameData.Volume;
     }
 
     // Update is called once per frame

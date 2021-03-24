@@ -58,6 +58,7 @@
 		<type fullname="UnityEngine.SkinnedMeshRenderer" preserve="nothing"/>
 		<type fullname="UnityEngine.AI.NavMeshData" preserve="nothing"/>
 		<type fullname="UnityEngine.AI.NavMeshAgent" preserve="nothing"/>
+		<type fullname="UnityEngine.PhysicMaterial" preserve="nothing"/>
 		<type fullname="UnityEngine.SphereCollider" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Assembly-CSharp">
@@ -70,11 +71,18 @@
 		<type fullname="GameManagerScript" preserve="nothing"/>
 		<type fullname="MoveObjectController" preserve="nothing"/>
 		<type fullname="MoveableObject" preserve="nothing"/>
+		<type fullname="NCMB.NCMBManager" preserve="nothing"/>
+		<type fullname="NCMB.NCMBSettings" preserve="nothing"/>
 		<type fullname="PlayerScript" preserve="nothing"/>
 		<type fullname="ResultScript" preserve="nothing"/>
 		<type fullname="RotateUnit" preserve="nothing"/>
 		<type fullname="TitleScript" preserve="nothing"/>
 		<type fullname="WallScript" preserve="nothing"/>
+		<type fullname="naichilab.RankingBoards" preserve="nothing"/>
+		<type fullname="naichilab.RankingInfo" preserve="nothing"/>
+		<type fullname="naichilab.RankingLoader" preserve="nothing"/>
+		<type fullname="naichilab.RankingNode" preserve="nothing"/>
+		<type fullname="naichilab.RankingSceneManager" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="UnityEditor.Graphs">
 		<type fullname="UnityEditor.Graphs.AnimationBlendTree.Graph" preserve="nothing"/>
@@ -83,17 +91,22 @@
 		<type fullname="UnityEditor.Graphs.AnimationStateMachine.GraphGUI" preserve="nothing"/>
 		<type fullname="UnityEditor.Graphs.AnimatorControllerTool" preserve="nothing"/>
 	</assembly>
-	<assembly fullname="UnityEditor.TestRunner">
-		<type fullname="UnityEditor.TestTools.TestRunner.TestListCacheData" preserve="nothing"/>
-	</assembly>
 	<assembly fullname="UnityEngine.UI">
 		<type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing"/>
+		<type fullname="UnityEngine.EventSystems.EventTrigger" preserve="nothing"/>
 		<type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Button" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.CanvasScaler" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ContentSizeFitter" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.GraphicRaycaster" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Image" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.InputField" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.LayoutElement" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Mask" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Outline" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ScrollRect" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Slider" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Text" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="nothing"/>
 	</assembly>
 </linker>

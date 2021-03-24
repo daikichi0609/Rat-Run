@@ -16,6 +16,7 @@ public class TitleScript : MonoBehaviour
 
     public Slider ModeChangeSlider;
     public Slider SensitivitySlider;
+    public Slider VolumeSlider;
 
     public int ModeNum;
     public int SensitivityNum;
@@ -24,6 +25,7 @@ public class TitleScript : MonoBehaviour
 
     public Text OnOffText;
     public Text SMLText;
+    public Text VolumeText;
 
     public AudioSource SwitchSound;
 
@@ -55,8 +57,11 @@ public class TitleScript : MonoBehaviour
                 break;
         }
 
+        VolumeSlider.value = GameData.Volume;
+
         ModeNum = (int)ModeChangeSlider.value;
         SensitivityNum = (int)SensitivitySlider.value;
+
         OldModeNum = ModeNum;
         OldSensitivityNum = SensitivityNum;
     }
@@ -67,7 +72,11 @@ public class TitleScript : MonoBehaviour
         ModeNum = (int)ModeChangeSlider.value;
         SensitivityNum = (int)SensitivitySlider.value;
 
-        if(ModeNum == 0)
+        GameData.Volume = VolumeSlider.value;
+        AudioListener.volume = GameData.Volume;
+        VolumeText.text = GameData.Volume.ToString("f2");
+
+        if (ModeNum == 0)
         {
             GameData.iPhone = false;
             OnOffText.text = "OFF";
@@ -153,7 +162,7 @@ public class TitleScript : MonoBehaviour
         {
             InitialTitleObjects[i].SetActive(false);
         }
-        for (int i = 0; i <= 7; i++)
+        for (int i = 0; i <= 10; i++)
         {
             OptionTitleObjects[i].SetActive(true);
         }
@@ -166,7 +175,7 @@ public class TitleScript : MonoBehaviour
         {
             InitialTitleObjects[i].SetActive(true);
         }
-        for (int i = 0; i <= 7; i++)
+        for (int i = 0; i <= 10; i++)
         {
             OptionTitleObjects[i].SetActive(false);
         }

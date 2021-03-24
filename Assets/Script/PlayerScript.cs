@@ -50,6 +50,7 @@ public class PlayerScript : MonoBehaviour
     public bool ClimbOn;
     //クールタイム
     public float CT;
+    public float restTime;
     //落下
     public float Gravity;
     //カメラ移動
@@ -62,6 +63,10 @@ public class PlayerScript : MonoBehaviour
     //ジョイスティック
     public FloatingJoystick HorizontalJoystick;
     public FloatingJoystick VerticalJoystick;
+    //摩擦
+    public BoxCollider col;
+    [SerializeField] private PhysicMaterial pm1;
+    [SerializeField] private PhysicMaterial pm2;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +80,7 @@ public class PlayerScript : MonoBehaviour
 
         rotateSpeed = GameData.rotateSpeed;
         rigidBody = Player.GetComponent<Rigidbody>();
-        Gravity = 0f;
+        Gravity = -4.0f;
     }
 
     // Update is called once per frame
@@ -83,6 +88,8 @@ public class PlayerScript : MonoBehaviour
     {
         //カメラ移動
         //MainCameraMove();
+
+        Debug.Log(rigidBody);
 
         //時間停止中は実行しない
         if (Mathf.Approximately(Time.timeScale, 0f))
@@ -95,6 +102,10 @@ public class PlayerScript : MonoBehaviour
         {
             CT -= Time.deltaTime;
         }
+        if (restTime >= 0)
+        {
+            restTime -= Time.deltaTime;
+        }
 
         playerVelocity = rigidBody.velocity;
         //Debug.Log(playerVelocity);
@@ -104,12 +115,18 @@ public class PlayerScript : MonoBehaviour
             return;
         }
         //制限時間が経つまで動ける
-        if (GameManager.TimeCount <= 0)
+        if (GameManager.TimeCount <= 0 && !GameData.Tutorial)
         {
+            h = 0f;
+            v = 0f;
+            RunningSound.SetActive(false);
+            WalkingSound.SetActive(false);
+            animator.SetBool("IsWalking", false);
+            col.material = pm2;
             return;
         }
         //壁登り条件
-        if (!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v == 1 && GameManager.MasterDetected == false && CT <= 0f)
+        if (!Stealth && !GameManager.isFaint && !GameManager.isGameOver && v > 0.1 && CT <= 0f)
         {
             ReadyToClimb = true;
         }
@@ -124,9 +141,10 @@ public class PlayerScript : MonoBehaviour
             countTime += Time.deltaTime; //スタートしてからの秒数を格納
             if (countTime >= 2f)
             {
-                countTime = 0;
+                countTime = 0f;
                 GameManager.isFaint = false;
                 FaintSound.Stop();
+                col.material = pm1;
             }
         }
         //ゲームオーバーと気絶のアニメーション
@@ -190,10 +208,12 @@ public class PlayerScript : MonoBehaviour
             // 左右のキー入力でキャラクタをY軸で旋回させる
             Vector3 playerPos = transform.position;
             transform.RotateAround(playerPos, Vector3.up, h * rotateSpeed);
+            Gravity = -4.0f;
         }
         else if(isClimbing)
         {
             Vector3 playerPos = transform.position;
+            Gravity = 0f;
             switch (ChangeGravity.num)
             {
                 //壁登りによって旋回角度が異なる
@@ -364,8 +384,12 @@ public class PlayerScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (GameManager.TimeCount <= 0 && !GameData.Tutorial)
+        {
+            return;
+        }
         //敵に触れたとき
-         if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             if(GameManager.isGameOver)
             {
@@ -373,19 +397,30 @@ public class PlayerScript : MonoBehaviour
             }
             if(GameData.Tutorial)
             {
+                if(restTime > 0)
+                {
+                    return;
+                }
+                //連続で吹き飛ばさない
+                restTime = 3.0f;
                 //クラッシュ
-                CT = 3.0f;
+                CT = 2.0f;
+                countTime = 0f;
                 GameManager.clashTimes++;
                 GameManager.isFaint = true;
                 CrashSound.Play();
                 FaintSound.Play();
+                playerVelocity.y = 0f;
                 rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
+                col.material = pm2;
                 return;
             }
             Debug.Log("GameOver");
             GameManager.iscaughtTimes++;
             GameManager.isGameOver = true;
+            playerVelocity.y = 0f;
             rigidBody.AddForce(playerVelocity * impulse, ForceMode.Impulse);
+            col.material = pm2;
         }
          //壁に衝突したとき
          else
@@ -407,28 +442,27 @@ public class PlayerScript : MonoBehaviour
                     return;
                 }
                 //クラッシュ
-                CT = 3.0f;
+                CT = 2.0f;
+                countTime = 0f;
                 GameManager.clashTimes++;
                 GameManager.isFaint = true;
                 CrashSound.Play();
                 FaintSound.Play();
+                playerVelocity.y = 0f;
                 rigidBody.AddForce(playerVelocity * -impulse, ForceMode.Impulse);
+                col.material = pm2;
             }  
-        }
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Plane" || other.gameObject.tag == "Wall")
-        {
-            Gravity = 0;
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        if (GameManager.TimeCount <= 0 && !GameData.Tutorial)
+        {
+            return;
+        }
         //物陰に隠れたとき
-        if(other.gameObject.tag == "Stealth")
+        if (other.gameObject.tag == "Stealth")
         {
             Stealth = true;
         }
@@ -456,18 +490,21 @@ public class PlayerScript : MonoBehaviour
         //壁登り解除
         if (other.gameObject.tag == "Plane" && isClimbing)
         {
-            CT = 3.0f;
+            CT = 2.0f;
             isClimbing = false;
-            Gravity = 0f;
             Debug.Log("A");
             //カメラ移動
             //MainCamera.transform.position = StealthCamera.transform.position;
             //MainCamera.transform.rotation = StealthCamera.transform.rotation;
             //CameraMoveCount = 75;
         }
-        if(other.gameObject.tag == "Plane" && !isClimbing)
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Plane")
         {
-            //FallTime = 1.0f;
+            Debug.Log("Stay");
         }
     }
 
@@ -484,7 +521,7 @@ public class PlayerScript : MonoBehaviour
         {
             if(!isClimbing)
             {
-                Gravity = -5.0f;
+                CT = 5.0f;
             }
         }
     }

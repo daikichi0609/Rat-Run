@@ -14,6 +14,8 @@ public class GameData: ScriptableObject
     public bool Tutorial;
     //スマホ用
     public bool iPhone;
+    //音量
+    public float Volume = 0.2f;
     //感度
     public float rotateSpeed;
     //獲得したチーズの数

@@ -19,8 +19,6 @@ public class EnemyScript : MonoBehaviour
     //ステージ内を巡回するポイント
     public Transform[] waypoints;
 
-    //public GameEnding gameEnding;
-
     //スネーク！！
     public GameObject exclamationPop;
     public GameObject detected;
@@ -47,6 +45,7 @@ public class EnemyScript : MonoBehaviour
     public AudioSource PunchSound;
     //クールタイム
     public float CT;
+    float restTime;
 
     // Start is called before the first frame update
     void Start()
@@ -82,10 +81,23 @@ public class EnemyScript : MonoBehaviour
         {
             CT -= Time.deltaTime;
         }
+        if (restTime >= 0)
+        {
+            restTime -= Time.deltaTime;
+        }
 
         if (GameManager.isGameOver)
         {
-            speed = 0;
+            speed = 0f;
+            return;
+        }
+
+        //制限時間が経つまで動ける
+        if (GameManager.TimeCount <= 0 && !GameData.Tutorial)
+        {
+            speed = 0f;
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
             return;
         }
         //状況に応じてアニメーションを変化
@@ -117,7 +129,6 @@ public class EnemyScript : MonoBehaviour
         //プレイヤーに気づいているとき
         if (isDetected)
         {
-            GameManager.MasterDetected = true;
             navMeshAgent.SetDestination(target.transform.position);
             //遅延
             if(!Waiting)
@@ -127,11 +138,16 @@ public class EnemyScript : MonoBehaviour
             }
         }
         //プレイヤーを見失うとき
-        if ((navMeshAgent.remainingDistance >= loseSightDistance) && isDetected)
+        //if ((navMeshAgent.remainingDistance >= loseSightDistance) && isDetected)
+        //{
+        //    MissPlayer();
+        //    Debug.Log("a");
+        //}
+        if(Player.Stealth && isDetected)
         {
             MissPlayer();
         }
-        else if(Player.Stealth && isDetected)
+        if (Player.isClimbing && isDetected)
         {
             MissPlayer();
         }
@@ -148,7 +164,11 @@ public class EnemyScript : MonoBehaviour
         {
             return;
         }
-        if(isDetected)
+        if (Player.isClimbing)
+        {
+            return;
+        }
+        if (isDetected)
         {
             return;
         }
@@ -165,7 +185,6 @@ public class EnemyScript : MonoBehaviour
     //プレイヤーを見失ったとき
     public void MissPlayer()
     {
-        GameManager.MasterDetected = false;
         Debug.Log("見失ったニャ！");
         GameManager.escapedTimes++;
         exclamationPop.SetActive(false);
@@ -187,26 +206,37 @@ public class EnemyScript : MonoBehaviour
     //プレイヤー到着時に呼ばれる
     private void OnCollisionEnter(Collision collision)
     {
+        if (GameManager.TimeCount <= 0 && !GameData.Tutorial)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("Player"))
         {
             if(GameManager.isGameOver)
             {
                 return;
             }
+
             //表示を消す
             exclamationPop.SetActive(false);
             //gameEnding.IsCaught();
-            //アニメーションをアイドル状態にする
-            //animator.SetBool("IsWalking", false);
-            //animator.SetBool("IsRunning", false);
 
             //追尾をやめる
             isDetected = false;
+
             //音を鳴らす 鳴り終わったらシーン遷移
-            PunchSound.Play();
-            TinSound.Play();
+            if (restTime <= 0)
+            {
+                PunchSound.Play();
+                TinSound.Play();
+            }
+
+            //連続で音を鳴らさない
+            restTime = 3.0f;
+
             if (GameData.Tutorial)
             {
+                CT = 3.0f;
                 return;
             }
             StartCoroutine(Checking(() => {
