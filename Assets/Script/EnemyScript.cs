@@ -89,6 +89,8 @@ public class EnemyScript : MonoBehaviour
         if (GameManager.isGameOver)
         {
             speed = 0f;
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
             return;
         }
 
@@ -100,6 +102,7 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("IsRunning", false);
             return;
         }
+
         //状況に応じてアニメーションを変化
         speed = rigid.velocity.magnitude;
         //Debug.Log(speed);

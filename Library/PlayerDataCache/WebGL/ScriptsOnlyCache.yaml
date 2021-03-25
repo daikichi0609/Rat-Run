@@ -28,8 +28,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
     - UnityEditor.Graphs.AnimatorControllerTool
-    UnityEditor.TestRunner.dll:
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -92,49 +90,49 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9500}
+      Script: {instanceID: 9576}
     - Class: 114
-      Script: {instanceID: 9512}
+      Script: {instanceID: 9588}
     - Class: 114
-      Script: {instanceID: 9540}
+      Script: {instanceID: 9616}
     - Class: 114
-      Script: {instanceID: 9542}
+      Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9548}
+      Script: {instanceID: 9624}
     - Class: 114
-      Script: {instanceID: 9550}
+      Script: {instanceID: 9626}
     - Class: 114
-      Script: {instanceID: 9554}
+      Script: {instanceID: 9630}
     - Class: 114
-      Script: {instanceID: 9562}
+      Script: {instanceID: 9638}
     - Class: 114
-      Script: {instanceID: 9574}
+      Script: {instanceID: 9650}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9674}
     - Class: 114
-      Script: {instanceID: 9600}
+      Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9660}
+      Script: {instanceID: 9740}
     - Class: 114
-      Script: {instanceID: 9816}
+      Script: {instanceID: 9906}
     - Class: 114
-      Script: {instanceID: 9902}
+      Script: {instanceID: 9998}
     - Class: 114
-      Script: {instanceID: 10000}
+      Script: {instanceID: 10110}
     - Class: 114
-      Script: {instanceID: 10096}
+      Script: {instanceID: 10222}
     - Class: 114
-      Script: {instanceID: 10150}
+      Script: {instanceID: 10288}
     - Class: 114
-      Script: {instanceID: 10246}
+      Script: {instanceID: 10392}
     - Class: 114
-      Script: {instanceID: 10308}
+      Script: {instanceID: 10466}
     - Class: 114
-      Script: {instanceID: 10388}
+      Script: {instanceID: 10550}
     - Class: 114
-      Script: {instanceID: 10568}
+      Script: {instanceID: 10740}
     - Class: 114
-      Script: {instanceID: 1999004}
+      Script: {instanceID: 19766}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -193,35 +191,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9540}
+      Script: {instanceID: 9494}
     - Class: 114
-      Script: {instanceID: 9542}
+      Script: {instanceID: 9616}
     - Class: 114
-      Script: {instanceID: 9548}
+      Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9554}
+      Script: {instanceID: 9624}
     - Class: 114
-      Script: {instanceID: 9562}
+      Script: {instanceID: 9630}
     - Class: 114
-      Script: {instanceID: 9574}
+      Script: {instanceID: 9638}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9650}
     - Class: 114
-      Script: {instanceID: 9600}
+      Script: {instanceID: 9674}
     - Class: 114
-      Script: {instanceID: 9660}
+      Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 10444}
+      Script: {instanceID: 9740}
     - Class: 114
-      Script: {instanceID: 1909520}
+      Script: {instanceID: 9886}
     - Class: 114
-      Script: {instanceID: 1909558}
+      Script: {instanceID: 10446}
     - Class: 114
-      Script: {instanceID: 1947540}
+      Script: {instanceID: 10608}
     - Class: 114
-      Script: {instanceID: 1947556}
+      Script: {instanceID: 11398}
     - Class: 114
-      Script: {instanceID: 1947560}
+      Script: {instanceID: 11528}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -280,43 +278,43 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9540}
+      Script: {instanceID: 9494}
     - Class: 114
-      Script: {instanceID: 9542}
+      Script: {instanceID: 9616}
     - Class: 114
-      Script: {instanceID: 9548}
+      Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9550}
+      Script: {instanceID: 9624}
     - Class: 114
-      Script: {instanceID: 9554}
+      Script: {instanceID: 9626}
     - Class: 114
-      Script: {instanceID: 9562}
+      Script: {instanceID: 9630}
     - Class: 114
-      Script: {instanceID: 9574}
+      Script: {instanceID: 9638}
     - Class: 114
-      Script: {instanceID: 9596}
+      Script: {instanceID: 9650}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9672}
     - Class: 114
-      Script: {instanceID: 9600}
+      Script: {instanceID: 9674}
     - Class: 114
-      Script: {instanceID: 9660}
+      Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9816}
+      Script: {instanceID: 9740}
     - Class: 114
-      Script: {instanceID: 10096}
+      Script: {instanceID: 9886}
     - Class: 114
-      Script: {instanceID: 10730}
+      Script: {instanceID: 9906}
     - Class: 114
-      Script: {instanceID: 1909520}
+      Script: {instanceID: 10222}
     - Class: 114
-      Script: {instanceID: 1909558}
+      Script: {instanceID: 10446}
     - Class: 114
-      Script: {instanceID: 1947540}
+      Script: {instanceID: 10908}
     - Class: 114
-      Script: {instanceID: 1947556}
+      Script: {instanceID: 11398}
     - Class: 114
-      Script: {instanceID: 1947560}
+      Script: {instanceID: 11528}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -349,37 +347,37 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9540}
+      Script: {instanceID: 9616}
     - Class: 114
-      Script: {instanceID: 9562}
+      Script: {instanceID: 9638}
     - Class: 114
-      Script: {instanceID: 9566}
+      Script: {instanceID: 9642}
     - Class: 114
-      Script: {instanceID: 9600}
+      Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9680}
+      Script: {instanceID: 9762}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9764}
     - Class: 114
-      Script: {instanceID: 9684}
+      Script: {instanceID: 9766}
     - Class: 114
-      Script: {instanceID: 9694}
+      Script: {instanceID: 9776}
     - Class: 114
-      Script: {instanceID: 9702}
+      Script: {instanceID: 9784}
     - Class: 114
-      Script: {instanceID: 9704}
+      Script: {instanceID: 9786}
     - Class: 114
-      Script: {instanceID: 9710}
+      Script: {instanceID: 9792}
     - Class: 114
-      Script: {instanceID: 9730}
+      Script: {instanceID: 9812}
     - Class: 114
-      Script: {instanceID: 9740}
+      Script: {instanceID: 9822}
     - Class: 114
-      Script: {instanceID: 9750}
+      Script: {instanceID: 9832}
     - Class: 114
-      Script: {instanceID: 1947546}
+      Script: {instanceID: 10030}
     - Class: 114
-      Script: {instanceID: 1947558}
+      Script: {instanceID: 11438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -425,6 +423,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
+  - hash:
+      serializedVersion: 2
+      Hash: a3fbc49f354838531e3ef794e1496b47
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RankingBoards
   - hash:
       serializedVersion: 2
       Hash: 9c7c87712e298256d276eb96e02a57b1
@@ -871,6 +875,12 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
+      Hash: 185113ff956e5730d0fd9b41cb98bd73
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: NCMB
+    className: NCMBSettings
+  - hash:
+      serializedVersion: 2
       Hash: bf8958e3e2042878b3dfb5d9990b6723
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -917,6 +927,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: c659de1708c9fd4c4fdf82fe5d49ea18
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RankingSceneManager
   - hash:
       serializedVersion: 2
       Hash: 32f6d1d5a09e5c94c633a32edd3e6836
@@ -967,10 +983,22 @@ ScriptsOnlyBuild:
     className: MoveableObject
   - hash:
       serializedVersion: 2
+      Hash: 605fdaa4a3086646ed49daa0a52127fc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Loginsignin
+  - hash:
+      serializedVersion: 2
       Hash: ce669872a2be11bc686ea22961d8a3bb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FloatingJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Logout
   - hash:
       serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
@@ -1009,6 +1037,12 @@ ScriptsOnlyBuild:
     className: RotateUnit
   - hash:
       serializedVersion: 2
+      Hash: 504ccc043b6424f98d2784937cd44476
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: getCurrentUser
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.Analytics.Editor.dll
     namespaceName: UnityEditor.Analytics
@@ -1019,6 +1053,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: NCMB
+    className: NCMBManager
   - hash:
       serializedVersion: 2
       Hash: 57d3bd96626ec58d928700aebebbdeda
@@ -1055,6 +1095,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.ProBuilder.dll
     namespaceName: UnityEngine.ProBuilder
     className: ColorPalette
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: QuickStart
+  - hash:
+      serializedVersion: 2
+      Hash: fd603770689195d8c21e05ad28422d62
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SampleSceneManager
   - hash:
       serializedVersion: 2
       Hash: 3f8d7b92a6be3c715e55d5cfa7cc8384
@@ -1177,6 +1229,12 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: 727cda87e1841163605c37ed66bad483
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DisableButton
+  - hash:
+      serializedVersion: 2
       Hash: 528e9858840cb8370d93939fff6b42d9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1237,10 +1295,22 @@ ScriptsOnlyBuild:
     className: Cat_Lite_Demo
   - hash:
       serializedVersion: 2
+      Hash: a27476ea1dfb1d8c6fae9db0cb2d07ec
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RankingInfo
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMesh
+  - hash:
+      serializedVersion: 2
+      Hash: fd1c2e717ced20af19cab0786bbcc429
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RankingNode
   - hash:
       serializedVersion: 2
       Hash: 9dac16f3efc511835ac976dfae55f580
@@ -1265,78 +1335,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 185113ff956e5730d0fd9b41cb98bd73
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: NCMB
-    className: NCMBSettings
-  - hash:
-      serializedVersion: 2
-      Hash: 605fdaa4a3086646ed49daa0a52127fc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Loginsignin
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Logout
-  - hash:
-      serializedVersion: 2
-      Hash: 504ccc043b6424f98d2784937cd44476
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: getCurrentUser
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: NCMB
-    className: NCMBManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: QuickStart
-  - hash:
-      serializedVersion: 2
-      Hash: 727cda87e1841163605c37ed66bad483
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DisableButton
-  - hash:
-      serializedVersion: 2
-      Hash: a3fbc49f354838531e3ef794e1496b47
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RankingBoards
-  - hash:
-      serializedVersion: 2
-      Hash: c659de1708c9fd4c4fdf82fe5d49ea18
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RankingSceneManager
-  - hash:
-      serializedVersion: 2
-      Hash: fd603770689195d8c21e05ad28422d62
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SampleSceneManager
-  - hash:
-      serializedVersion: 2
-      Hash: a27476ea1dfb1d8c6fae9db0cb2d07ec
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RankingInfo
-  - hash:
-      serializedVersion: 2
-      Hash: fd1c2e717ced20af19cab0786bbcc429
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RankingNode
   - hash:
       serializedVersion: 2
       Hash: 071437713120abc71e0023acbaae5760

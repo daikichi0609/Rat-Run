@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{15B1F042-BB49-FF1E-7273-BAFA0C4640EE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/PlayerScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/EnemyScript.cs">
     <Files>
       <File FileName="Assets/Script/GameManagerScript.cs" Line="61" Column="10" />
-      <File FileName="Assets/Script/EnemyScript.cs" />
-      <File FileName="Assets/Script/PlayerScript.cs" Line="427" Column="10" />
+      <File FileName="Assets/Script/EnemyScript.cs" Line="95" Column="10" />
+      <File FileName="Assets/Script/PlayerScript.cs" Line="152" Column="10" />
       <File FileName="Assets/Script/GameData.cs" />
       <File FileName="Assets/Script/RotateUnit.cs" />
       <File FileName="Assets/Script/TitleScript.cs" />
