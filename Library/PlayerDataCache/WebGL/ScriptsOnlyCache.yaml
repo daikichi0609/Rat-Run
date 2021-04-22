@@ -16,6 +16,8 @@ ScriptsOnlyBuild:
     - ResultScript
     - RotateUnit
     - TitleScript
+    - TurnTheGameOn.ArrowWaypointer.Waypoint
+    - TurnTheGameOn.ArrowWaypointer.WaypointController
     - WallScript
     - naichilab.RankingBoards
     - naichilab.RankingInfo
@@ -90,49 +92,49 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9576}
+      Script: {instanceID: 9578}
     - Class: 114
-      Script: {instanceID: 9588}
-    - Class: 114
-      Script: {instanceID: 9616}
+      Script: {instanceID: 9590}
     - Class: 114
       Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9624}
+      Script: {instanceID: 9620}
     - Class: 114
       Script: {instanceID: 9626}
     - Class: 114
-      Script: {instanceID: 9630}
+      Script: {instanceID: 9628}
     - Class: 114
-      Script: {instanceID: 9638}
+      Script: {instanceID: 9632}
     - Class: 114
-      Script: {instanceID: 9650}
+      Script: {instanceID: 9640}
     - Class: 114
-      Script: {instanceID: 9674}
+      Script: {instanceID: 9652}
     - Class: 114
       Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9740}
+      Script: {instanceID: 9678}
     - Class: 114
-      Script: {instanceID: 9906}
+      Script: {instanceID: 9742}
     - Class: 114
-      Script: {instanceID: 9998}
+      Script: {instanceID: 9912}
     - Class: 114
-      Script: {instanceID: 10110}
+      Script: {instanceID: 10004}
     - Class: 114
-      Script: {instanceID: 10222}
+      Script: {instanceID: 10116}
     - Class: 114
-      Script: {instanceID: 10288}
+      Script: {instanceID: 10228}
     - Class: 114
-      Script: {instanceID: 10392}
+      Script: {instanceID: 10294}
     - Class: 114
-      Script: {instanceID: 10466}
+      Script: {instanceID: 10400}
     - Class: 114
-      Script: {instanceID: 10550}
+      Script: {instanceID: 10474}
     - Class: 114
-      Script: {instanceID: 10740}
+      Script: {instanceID: 10560}
     - Class: 114
-      Script: {instanceID: 19766}
+      Script: {instanceID: 10750}
+    - Class: 114
+      Script: {instanceID: 20042}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -193,33 +195,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9494}
     - Class: 114
-      Script: {instanceID: 9616}
-    - Class: 114
       Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9624}
+      Script: {instanceID: 9620}
     - Class: 114
-      Script: {instanceID: 9630}
+      Script: {instanceID: 9626}
     - Class: 114
-      Script: {instanceID: 9638}
+      Script: {instanceID: 9632}
     - Class: 114
-      Script: {instanceID: 9650}
+      Script: {instanceID: 9640}
     - Class: 114
-      Script: {instanceID: 9674}
+      Script: {instanceID: 9652}
     - Class: 114
       Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9740}
+      Script: {instanceID: 9678}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9742}
     - Class: 114
-      Script: {instanceID: 10446}
+      Script: {instanceID: 9892}
     - Class: 114
-      Script: {instanceID: 10608}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 11398}
+      Script: {instanceID: 10618}
     - Class: 114
-      Script: {instanceID: 11528}
+      Script: {instanceID: 11410}
+    - Class: 114
+      Script: {instanceID: 11542}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -280,41 +282,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9494}
     - Class: 114
-      Script: {instanceID: 9616}
-    - Class: 114
       Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9624}
+      Script: {instanceID: 9620}
     - Class: 114
       Script: {instanceID: 9626}
     - Class: 114
-      Script: {instanceID: 9630}
+      Script: {instanceID: 9628}
     - Class: 114
-      Script: {instanceID: 9638}
+      Script: {instanceID: 9632}
     - Class: 114
-      Script: {instanceID: 9650}
+      Script: {instanceID: 9640}
     - Class: 114
-      Script: {instanceID: 9672}
+      Script: {instanceID: 9652}
     - Class: 114
       Script: {instanceID: 9674}
     - Class: 114
       Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9740}
+      Script: {instanceID: 9678}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9742}
     - Class: 114
-      Script: {instanceID: 9906}
+      Script: {instanceID: 9876}
     - Class: 114
-      Script: {instanceID: 10222}
+      Script: {instanceID: 9892}
     - Class: 114
-      Script: {instanceID: 10446}
+      Script: {instanceID: 9912}
     - Class: 114
-      Script: {instanceID: 10908}
+      Script: {instanceID: 10228}
     - Class: 114
-      Script: {instanceID: 11398}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 11528}
+      Script: {instanceID: 10454}
+    - Class: 114
+      Script: {instanceID: 10918}
+    - Class: 114
+      Script: {instanceID: 11410}
+    - Class: 114
+      Script: {instanceID: 11542}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -347,37 +353,37 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9616}
+      Script: {instanceID: 9618}
     - Class: 114
-      Script: {instanceID: 9638}
+      Script: {instanceID: 9640}
     - Class: 114
-      Script: {instanceID: 9642}
+      Script: {instanceID: 9644}
     - Class: 114
-      Script: {instanceID: 9676}
-    - Class: 114
-      Script: {instanceID: 9762}
+      Script: {instanceID: 9678}
     - Class: 114
       Script: {instanceID: 9764}
     - Class: 114
       Script: {instanceID: 9766}
     - Class: 114
-      Script: {instanceID: 9776}
+      Script: {instanceID: 9768}
     - Class: 114
-      Script: {instanceID: 9784}
+      Script: {instanceID: 9778}
     - Class: 114
       Script: {instanceID: 9786}
     - Class: 114
-      Script: {instanceID: 9792}
+      Script: {instanceID: 9788}
     - Class: 114
-      Script: {instanceID: 9812}
+      Script: {instanceID: 9794}
     - Class: 114
-      Script: {instanceID: 9822}
+      Script: {instanceID: 9814}
     - Class: 114
-      Script: {instanceID: 9832}
+      Script: {instanceID: 9824}
     - Class: 114
-      Script: {instanceID: 10030}
+      Script: {instanceID: 9834}
     - Class: 114
-      Script: {instanceID: 11438}
+      Script: {instanceID: 10036}
+    - Class: 114
+      Script: {instanceID: 11450}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -453,6 +459,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ActivationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f8bd7a92bf9f22d289759689ae7b1fd4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: TurnTheGameOn.ArrowWaypointer
+    className: SmoothFollow
   - hash:
       serializedVersion: 2
       Hash: bdc907e71aeb61957ef32fc70fc365da
@@ -671,6 +683,18 @@ ScriptsOnlyBuild:
     className: PolyShape
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements
+    className: CallbackExecutor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements.Editor
+    className: Placeholder
+  - hash:
+      serializedVersion: 2
       Hash: 9f30e6b3dc13fad2eaa9074a58d5f806
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -869,6 +893,12 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: b18f1f5690ed802d58cd7ead5c7fae0a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: TurnTheGameOn.ArrowWaypointer
+    className: Waypoint
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1011,6 +1041,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnityStandardAssets.ImageEffects
     className: SunShafts
+  - hash:
+      serializedVersion: 2
+      Hash: 9994064b90a7263d2e24e378cfba8db0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: TurnTheGameOn.ArrowWaypointer
+    className: WaypointController
   - hash:
       serializedVersion: 2
       Hash: e9389e944eb81a3a9df56fcdb09ce6a9
@@ -1295,6 +1331,12 @@ ScriptsOnlyBuild:
     className: Cat_Lite_Demo
   - hash:
       serializedVersion: 2
+      Hash: 5e8a01a14cef8c5fb6866e39e13545df
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CharacterControllerThirdPerson
+  - hash:
+      serializedVersion: 2
       Hash: a27476ea1dfb1d8c6fae9db0cb2d07ec
     assemblyName: Assembly-CSharp.dll
     namespaceName: naichilab
@@ -1317,6 +1359,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: VariableJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UserControlThirdPerson
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
@@ -1347,4 +1395,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main.unity
   - Assets/Scenes/Result.unity
   - Assets/naichilab/unity-simple-ranking/Scenes/Ranking.unity
-  playerPath: /Users/daikichi/Desktop/Rat Run !! WebGL/Rat Run !!
+  playerPath: /Users/daikichi/Desktop/Building/Rat Run !! WebGL/Rat Run !!

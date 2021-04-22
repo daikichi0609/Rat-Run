@@ -479,7 +479,7 @@ public class PlayerScript : MonoBehaviour
         //壁登り
         if(other.gameObject.tag == "Wall" && ReadyToClimb)
         {
-            if(isClimbing)
+            if(isClimbing || v <= 0)
             {
                 return;
             }
@@ -490,6 +490,10 @@ public class PlayerScript : MonoBehaviour
         //壁登り解除
         if (other.gameObject.tag == "Plane" && isClimbing)
         {
+            if(v <= 0)
+            {
+                return;
+            }
             CT = 2.0f;
             isClimbing = false;
             Debug.Log("A");

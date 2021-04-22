@@ -50,20 +50,20 @@ public class ResultScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && Finish)
-        {
-            PushSound.Play();
-            StartCoroutine(CheckingSound(() => {
-                SceneManager.LoadScene("Main");
-            }));
-        }
-        if (Input.GetKeyDown(KeyCode.T) && Finish)
-        {
-            PushSound.Play();
-            StartCoroutine(CheckingSound(() => {
-                SceneManager.LoadScene("Title");
-            }));
-        }
+        //if(Input.GetKeyDown(KeyCode.R) && Finish)
+        //{
+        //    PushSound.Play();
+        //    StartCoroutine(CheckingSound(() => {
+        //        SceneManager.LoadScene("Main");
+        //    }));
+        //}
+        //if (Input.GetKeyDown(KeyCode.T) && Finish)
+        //{
+        //    PushSound.Play();
+        //    StartCoroutine(CheckingSound(() => {
+        //        SceneManager.LoadScene("Title");
+        //    }));
+        //}
 
         //スコア表示
         if(start[0])
@@ -210,19 +210,23 @@ public class ResultScript : MonoBehaviour
     void ShowFinish()
     {
         StartCoroutine(CheckingSound(() => {
-            Finish = true;
+            //Finish = true;
             //スコア機能
             naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Score);
-            if (!GameData.iPhone)
-            {
-                RetryText.SetActive(true);
-                TitleText.SetActive(true);
-            }
-            else if(GameData.iPhone)
-            {
-                RetryButton.SetActive(true);
-                TitleButton.SetActive(true);
-            }
+
+            RetryButton.SetActive(true);
+            TitleButton.SetActive(true);
+
+            //if (!GameData.iPhone)
+            //{
+            //    RetryText.SetActive(true);
+            //    TitleText.SetActive(true);
+            //}
+            //else if(GameData.iPhone)
+            //{
+            //    RetryButton.SetActive(true);
+            //    TitleButton.SetActive(true);
+            //}
         }));
     }
 
